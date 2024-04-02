@@ -51,6 +51,20 @@ public class BST {
         return false;
     }
 
+    public boolean searchTree(int val, BSTNode root) {
+        if (val == root.getVal()) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        if (val < root.getVal()) {
+            return searchTree(val, root.getLeft());
+        }
+        else if (val > root.getVal()) {
+            return searchTree(val, root.getRight());
+    }
+
     /**
      * @return ArrayList of BSTNodes in inorder
      */
