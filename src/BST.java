@@ -48,21 +48,27 @@ public class BST {
      */
     public boolean search(int val) {
         // TODO: Complete the search function
-        return false;
+        return searchTree(val, root);
     }
 
+    // Returns true if a given val is in the tree, otherwise returns false
     public boolean searchTree(int val, BSTNode root) {
-        if (val == root.getVal()) {
-            return true;
-        }
+        // If root doesn't exist, return false
         if (root == null) {
             return false;
         }
+        // If val equals the root, return true
+        if (val == root.getVal()) {
+            return true;
+        }
+        // If val is less than the root, return searchTree with the left child as the new root
         if (val < root.getVal()) {
             return searchTree(val, root.getLeft());
         }
-        else if (val > root.getVal()) {
+        // Otherwise, return searchTree with the right child as the new root
+        else {
             return searchTree(val, root.getRight());
+        }
     }
 
     /**
@@ -70,7 +76,31 @@ public class BST {
      */
     public ArrayList<BSTNode> getInorder() {
         // TODO: Complete inorder traversal
-        return null;
+        // Initialize an ArrayList of BSTNodes
+        ArrayList<BSTNode> inOrderSol = new ArrayList<BSTNode>();
+        // get the inorder traversal of the ArrayList
+        return getInorderTraversal(root, inOrderSol);
+    }
+
+    // Returns an ArrayList of BSTNodes in inorder
+    public ArrayList<BSTNode> getInorderTraversal(BSTNode root, ArrayList<BSTNode> inOrderSol) {
+        // If the root doesn't exist, return sol
+        if (root == null) {
+            return inOrderSol;
+        }
+
+        // LEFT, ROOT, RIGHT traversal
+        // First, add the left child to sol if it exists
+        getInorderTraversal(root.getLeft(), inOrderSol);
+
+        // Second, add the root
+        inOrderSol.add(root);
+
+        // Third, add the right child to sol if it exists
+        getInorderTraversal(root.getRight(), inOrderSol);
+
+        // Return sol
+        return inOrderSol;
     }
 
     /**
@@ -78,7 +108,31 @@ public class BST {
      */
     public ArrayList<BSTNode> getPreorder() {
         // TODO: Complete preorder traversal
-        return null;
+        // Initialize an ArrayList of BSTNodes
+        ArrayList<BSTNode> preOrderSol = new ArrayList<BSTNode>();
+        // get the preorder traversal of the ArrayList
+        return getPreorderTraversal(root, preOrderSol);
+    }
+
+    // Returns an ArrayList of BSTNodes in preorder
+    public ArrayList<BSTNode> getPreorderTraversal(BSTNode root, ArrayList<BSTNode> preOrderSol) {
+        // If the root doesn't exist, return sol
+        if (root == null) {
+            return preOrderSol;
+        }
+
+        // ROOT, LEFT, RIGHT traversal
+        // First, add the root
+        preOrderSol.add(root);
+
+        // Second, add the left child to sol if it exists
+        getPreorderTraversal(root.getLeft(), preOrderSol);
+
+        // Third, add the right child to sol if it exists
+        getPreorderTraversal(root.getRight(), preOrderSol);
+
+        // Return sol
+        return preOrderSol;
     }
 
     /**
@@ -86,7 +140,31 @@ public class BST {
      */
     public ArrayList<BSTNode> getPostorder() {
         // TODO: Complete postorder traversal
-        return null;
+        // Initialize an ArrayList of BSTNodes
+        ArrayList<BSTNode> postOrderSol = new ArrayList<BSTNode>();
+        // get the postorder traversal of the ArrayList
+        return getPreorderTraversal(root, postOrderSol);
+    }
+
+    // Returns an ArrayList of BSTNodes in postorder
+    public ArrayList<BSTNode> getPostorderTraversal(BSTNode root, ArrayList<BSTNode> postOrderSol) {
+        // If the root doesn't exist, return sol
+        if (root == null) {
+            return postOrderSol;
+        }
+
+        // LEFT, RIGHT, ROOT traversal
+        // First, add the left child to sol if it exists
+        getPreorderTraversal(root.getLeft(), postOrderSol);
+
+        // Second, add the right child to sol if it exists
+        getPreorderTraversal(root.getRight(), postOrderSol);
+
+        // Third, add the root
+        postOrderSol.add(root);
+
+        // Return sol
+        return postOrderSol;
     }
 
     /**
@@ -97,6 +175,25 @@ public class BST {
      */
     public void insert(int val) {
         // TODO: Complete insert
+        // Set current tree to a tree with an inserted node
+        root = insertNode(root, val);
+    }
+    // It recursively returns a tree with a node inserted
+    public BSTNode insertNode(BSTNode currentNode, int val) {
+        // If the currentNode does not exist, return a new BSTNode with val
+        if (currentNode == null) {
+            return new BSTNode(val);
+        }
+        if (val < currentNode.getVal()) {
+            // Set currentNode's left child to whatever insert returns back
+            currentNode.setLeft(insertNode(currentNode.getLeft(), val));
+        }
+        if (val > currentNode.getVal()) {
+            // Set currentNode's right child to whatever insert returns back
+            currentNode.setRight(insertNode(currentNode.getRight(), val));
+        }
+        // Otherwise, val must equal currentNode's value, so return the currentNode
+        return currentNode;
     }
 
     /**
