@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 /**
  * An Integer Binary Search Tree
- * @author: Your Name Here
- * @version: Date
+ * @author: Josie Lee
+ * @version: 4/5/2024
  */
 
 public class BST {
@@ -78,7 +78,7 @@ public class BST {
         // TODO: Complete inorder traversal
         // Initialize an ArrayList of BSTNodes
         ArrayList<BSTNode> inOrderSol = new ArrayList<BSTNode>();
-        // get the inorder traversal of the ArrayList
+        // Get the inorder traversal of the ArrayList
         return getInorderTraversal(root, inOrderSol);
     }
 
@@ -110,7 +110,7 @@ public class BST {
         // TODO: Complete preorder traversal
         // Initialize an ArrayList of BSTNodes
         ArrayList<BSTNode> preOrderSol = new ArrayList<BSTNode>();
-        // get the preorder traversal of the ArrayList
+        // Get the preorder traversal of the ArrayList
         return getPreorderTraversal(root, preOrderSol);
     }
 
@@ -142,8 +142,8 @@ public class BST {
         // TODO: Complete postorder traversal
         // Initialize an ArrayList of BSTNodes
         ArrayList<BSTNode> postOrderSol = new ArrayList<BSTNode>();
-        // get the postorder traversal of the ArrayList
-        return getPreorderTraversal(root, postOrderSol);
+        // Get the postorder traversal of the ArrayList
+        return getPostorderTraversal(root, postOrderSol);
     }
 
     // Returns an ArrayList of BSTNodes in postorder
@@ -155,10 +155,10 @@ public class BST {
 
         // LEFT, RIGHT, ROOT traversal
         // First, add the left child to sol if it exists
-        getPreorderTraversal(root.getLeft(), postOrderSol);
+        getPostorderTraversal(root.getLeft(), postOrderSol);
 
         // Second, add the right child to sol if it exists
-        getPreorderTraversal(root.getRight(), postOrderSol);
+        getPostorderTraversal(root.getRight(), postOrderSol);
 
         // Third, add the root
         postOrderSol.add(root);
